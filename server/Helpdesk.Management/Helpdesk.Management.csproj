@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Helpddesk.DataMapper\Helpdesk.DataMapper.csproj" />
+    <ProjectReference Include="..\Helpdesk.Data\Helpdesk.Data.csproj" />
+    <ProjectReference Include="..\Helpdesk.Diagnostics\Helpdesk.Diagnostics.csproj" />
+    <ProjectReference Include="..\Helpdesk.Model\Helpdesk.Model.csproj" />
+    <ProjectReference Include="..\Helpdesk.Repository\Helpdesk.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

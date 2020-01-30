@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Helpdesk.Data\Helpdesk.Data.csproj" />
+    <ProjectReference Include="..\Helpdesk.Filters\Helpdesk.Filters.csproj" />
+    <ProjectReference Include="..\Helpdesk.IOC\Helpdesk.IOC.csproj" />
+    <ProjectReference Include="..\Helpdesk.Management\Helpdesk.Management.csproj" />
+  </ItemGroup>
+
+
+</Project>

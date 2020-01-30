@@ -1,0 +1,60 @@
+<p-dialog header="'{popupTitle}'" [(visible)]="display" [style]="{width: '40%', height: '40%'}" onHide="hidePopup()">
+
+  <div class="row">
+
+
+    <div class="col-sm-3 m-b-1 required">
+      <label for="apl-lst"> Client Name:</label>
+    </div>
+    <div class="col-sm-5 m-b-1">
+      <input type="text" class="form-control d-inline" name="apllst" id="apl-lst" [(ngModel)]="clientName"
+        [disabled]="!canEdit">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 m-b-1 required">
+      <label for="apl-lst"> Title:</label>
+    </div>
+    <div class="col-sm-5 m-b-1">
+      <input type="text" class="form-control d-inline" name="apllst" id="apl-lst" [(ngModel)]="title"
+        [disabled]="!canEdit">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 m-b-1 required">
+      <label for="apl-lst"> Problem Description:</label>
+    </div>
+    <div class="col-sm-5 m-b-1">
+      <textarea class="form-control d-inline" name="prvaddress" id="prv-address" rows="2" cols="2"
+        [(ngModel)]="problemDescription" [disabled]="!canEdit"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 m-b-1 required">
+      <label for="apl-lst"> Assigned To:</label>
+    </div>
+    <div class="col-sm-5 m-b-1">
+      <input type="text" class="form-control d-inline" name="apllst" id="apl-lst" [(ngModel)]="assignedUserFullName"
+        [disabled]="!canEdit">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3 m-b-1 required">
+      <label for="statusId">
+        Status:</label></div>
+    <div class="col-sm-5 m-b-1">
+      <p-dropdown class="dropdown" [options]="workItemStatusList" placeholder="Work Item Status" [disabled]="!canEdit"
+        [(ngModel)]="workItemStatus" optionLabel="Name" id="statusId">
+      </p-dropdown>
+    </div>
+
+  </div>
+
+  <div class="text-center no-gutter right hidden-print" *ngIf="canEdit">
+    <button class="btn btn-primary m-r-2 fontweightbold" (click)="save()" [disabled]="!enableSaveButton">Save</button>
+    <button class="btn btn-primary  fontweightbold" (click)="cancel()">Cancel</button>
+  </div>
+
+
+</p-dialog>

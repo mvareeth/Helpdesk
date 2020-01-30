@@ -1,0 +1,36 @@
+<div class="ticketInfo">
+
+  <!-- Busy Indicator -->
+  <div class="busy-indicator text-center" *ngIf="isBusy">
+    <div class="cg-busy-default-wrapper cg-busy-backdrop">
+      <i class="fa fa-spinner fa-spin fa-3x fa-fw "></i>
+      <p>{{ busyMessage }}</p>
+    </div>
+  </div>
+  <div class="row right">
+    <div class="right">
+      <button type="button" class="btn btn-primary right" (click)="addTicket()">Add Ticket</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 m-t-1 p-r-1">
+      <ul class="nav nav-tabs">
+        <li id="myTickeTab" [class.active]="selectedTab === 'myTickeTab'" (click)="onSelect('myTickeTab')">
+          <a [routerLink]="['own']">Own Tickets</a>
+        </li>
+        <li id="allTickeTab" [class.active]="selectedTab === 'allTickeTab'" (click)="onSelect('allTickeTab')">
+          <a [routerLink]="['all']">All Tickets</a>
+        </li>
+      </ul>
+      <div class="tab-content m-b-half">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <app-helpdesk-detail *ngIf="showDialog" (closePopup)="hidePopupWindow()">
+    </app-helpdesk-detail>
+  </div>
+
+</div>

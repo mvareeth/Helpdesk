@@ -1,0 +1,33 @@
+<section class="ticketInfo">
+  <h4 class="right">{{appService.WelcomeMessage}}</h4>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-3 m-b-1 required">
+        <label for="apl-uname">
+          User Name:</label>
+      </div>
+      <div class="col-sm-3  m-b-1">
+        <input type="text" class="form-control d-inline" name="apluname" id="apl-uname" [(ngModel)]="userName">
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-3 m-b-1 required">
+        <label for="apl-password">
+          Password:</label>
+      </div>
+      <div class="col-sm-3  m-b-1">
+        <input type="text" class="form-control d-inline" name="aplpassword" id="apl-password" [(ngModel)]="password">
+      </div>
+
+    </div>
+
+    <div class="clear w-100"></div>
+    <div class="text-center no-gutter hidden-print">
+      <button class="btn btn-primary  fontweightbold" (click)="login()" [disabled]="!enableLoginButton">Login</button>
+    </div>
+
+    <div class="clear w-100"></div>
+  </div>
+</section>
