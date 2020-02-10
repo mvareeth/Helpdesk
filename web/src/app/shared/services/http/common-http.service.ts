@@ -20,12 +20,7 @@ export class CommonHttpService {
     private http: HttpClient) {
     this.tokenExcludedURLs.push('api/jwt/windowstoken');
     this.tokenExcludedURLs.push('api/jwt/token');
-    this.tokenExcludedURLs.push('services/configuration/ping');
-    this.tokenExcludedURLs.push('services/configuration/windowstoken'); //Todo:
-    this.tokenExcludedURLs.push('services/configuration');
-
     this.windowsCredentialURLs.push('api/jwt/windowstoken');
-    this.windowsCredentialURLs.push('services/configuration/windowstoken');
 
     this.config = tokenService.getToken();
 
