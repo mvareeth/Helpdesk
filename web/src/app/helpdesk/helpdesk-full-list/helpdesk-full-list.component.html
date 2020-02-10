@@ -6,4 +6,10 @@
 
   </div>
 
+  <div class="row">
+    <app-helpdesk-detail *ngIf="showDialog" (closePopup)="hidePopupWindow()" [helpdeskId] = "helpdeskId">
+
+    </app-helpdesk-detail>
+  </div>
+  
 </div>
