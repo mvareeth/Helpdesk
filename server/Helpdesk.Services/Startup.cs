@@ -24,11 +24,11 @@ namespace Helpdesk.Services
         }
 
         public IConfiguration Configuration { get; }
-
+        public readonly string allowSpecificOrigin = "AllowSpecificOrigin";
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureCors();
+            services.ConfigureCors(allowSpecificOrigin);
             services.ConfigureAuthentication();
             services.AddMemoryCache();
             services.AddOptions();
@@ -48,7 +48,7 @@ namespace Helpdesk.Services
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(allowSpecificOrigin);
             app.UseHttpsRedirection();
 
             app.UseRouting();
