@@ -1,4 +1,4 @@
-<p-dialog header="'{popupTitle}'" [(visible)]="display" [style]="{width: '40%', height: '40%'}" onHide="hidePopup()">
+<p-dialog [(header)]="popupTitle" [(visible)]="display" [style]="{width: '40%', height: '40%'}" onHide="hidePopup()" [modal]="true" [closable]="false">
 
   <div class="row">
 
