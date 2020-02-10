@@ -38,7 +38,7 @@ export class HelpdeskDetailComponent implements OnInit {
     //
   }
   public cancel() {
-    //
+    this.closePopup.emit(true);
   }
   private getStatusList() {
     // this.appService.getStatusList()
@@ -48,6 +48,7 @@ export class HelpdeskDetailComponent implements OnInit {
   }
 
   public hidePopup() {
+    this.display = false;
     this.closePopup.emit(true);
   }
 }
