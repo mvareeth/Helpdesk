@@ -11,6 +11,7 @@ export class HelpdeskComponent implements OnInit {
   public busyMessage: string;
   public selectedTab: string = 'myTickeTab';
   public showDialog: boolean = false;
+  public helpdeskId: number;
 
   public constructor() { }
 
@@ -22,6 +23,7 @@ export class HelpdeskComponent implements OnInit {
   }
 
   public addTicket() {
+    this.helpdeskId = undefined;
     this.showDialog = true;
     this.selectedTab = 'myTickeTab';
   }
