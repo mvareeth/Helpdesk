@@ -93,7 +93,7 @@ namespace Helpdesk.Services
         {
             get
             {
-                string[] servingURLs = AppSettingsSection[nameof(AppSettings.SASClientURLs)].Split(',');
+                string[] servingURLs = AppSettingsSection[nameof(AppSettings.ClientURLs)].Split(',');
                 for (int index = 0; index < servingURLs.Length; index++)
                 {
                     Uri clientUri;
