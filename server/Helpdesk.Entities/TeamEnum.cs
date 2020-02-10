@@ -6,7 +6,7 @@ namespace Helpdesk.Entities
 {
     public enum TeamEnum
     {
-        Helpdesk = 1,
-        Other = 2
+        Helpdesk = 100,
+        Other = 200
     }
 }
