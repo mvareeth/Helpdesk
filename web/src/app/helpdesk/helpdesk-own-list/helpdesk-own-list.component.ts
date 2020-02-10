@@ -15,6 +15,7 @@ export class HelpdeskOwnListComponent implements OnInit {
   public ticketListColumnDefs = [];
   public ticketListGridApi: any;
   public showDialog: boolean = false;
+  public helpdeskId: number;
 
   constructor(private helpdeskService: HelpdeskService) {
     this.rankListGrid();
@@ -89,21 +90,25 @@ export class HelpdeskOwnListComponent implements OnInit {
   private generateFilterLink(params) {
     const filterLink = document.createElement('a'), self = this;
     self.showDialog = false;
+    self.helpdeskId = undefined;
     filterLink.setAttribute(
       'class',
       `agGridLink tabbingContent tabbingItem_${params.column.getColId()}_${params.rowIndex}`
     ); // Class for CSS
     filterLink.setAttribute('href', '#');
     filterLink.setAttribute('title', `Open ${params.data.title}`);
+    filterLink.setAttribute('id', `${params.data.id}`);
     filterLink.innerHTML = params.data.title;
     filterLink.addEventListener('click', function ($event) {
       $event.preventDefault();
+      self.helpdeskId = +(($event.target) as any).id;
       self.showDialog = true;
     });
     return filterLink;
   }
 
   public hidePopupWindow() {
+    this.helpdeskId = undefined;
     this.showDialog = false;
   }
 }
