@@ -9,7 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Helpdesk.Management\Helpdesk.Management.csproj" />
+    <ProjectReference Include="..\Helpdesk.Cache\Helpdesk.Cache.csproj" />
+    <ProjectReference Include="..\Helpdesk.Security\Helpdesk.Security.csproj" />
   </ItemGroup>
 
 </Project>

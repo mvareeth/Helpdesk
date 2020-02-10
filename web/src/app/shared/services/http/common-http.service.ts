@@ -197,7 +197,7 @@ export class CommonHttpService {
         responseType: null,
         withCredentials: additionalOptions.withCredentials,
       };
-      options = options.merge(additionalOptions);
+      //options = options.merge(additionalOptions);
     }
     if (method === 'GET') {
       reqOpts = new HttpRequest<any>(method, requestArgs.url, httpOptions);
@@ -275,7 +275,7 @@ export class CommonHttpService {
     }
 
     this.excludeTokenValidation = this.isTokenValidationExcluded(url);
-    this.windowsCredentialValidation = this.isWindowsCredentialUrls(url);
+    this.windowsCredentialValidation = false; // this.isWindowsCredentialUrls(url);
     let options: any;
     if (this.windowsCredentialValidation) {
       options = {

@@ -5,10 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Helpdesk.Cache\Helpdesk.Cache.csproj" />
+    <ProjectReference Include="..\Helpdesk.Configuration\Helpdesk.Configuration.csproj" />
     <ProjectReference Include="..\Helpdesk.Data\Helpdesk.Data.csproj" />
+    <ProjectReference Include="..\Helpdesk.Extensions\Helpdesk.Extensions.csproj" />
     <ProjectReference Include="..\Helpdesk.Filters\Helpdesk.Filters.csproj" />
     <ProjectReference Include="..\Helpdesk.IOC\Helpdesk.IOC.csproj" />
     <ProjectReference Include="..\Helpdesk.Management\Helpdesk.Management.csproj" />
+    <ProjectReference Include="..\Helpdesk.Security\Helpdesk.Security.csproj" />
   </ItemGroup>
 
 

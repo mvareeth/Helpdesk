@@ -1,5 +1,6 @@
 ﻿using Helpdesk.IOC;
 using Helpdesk.Management.Clients;
+using Helpdesk.Management.Security;
 using Helpdesk.Management.Tickets;
 using Helpdesk.Management.User;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,7 @@ namespace Helpdesk.IOC
         private void ConfigureUserManager(IServiceCollection services)
         {
             services.AddScoped<IUserReadManager, UserReadManager>();
+            services.AddScoped<ISecurityReadManager, SecurityReadManager>();
         }
 
         private void ConfigureClientManager(IServiceCollection services)

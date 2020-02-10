@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError, concat } from 'rxjs';
 import { catchError, map, filter, switchMap } from 'rxjs/operators';
 
 // our services
@@ -102,8 +102,6 @@ export class CommonDataService {
     if (response.status < 200 || response.status >= 300) {
       throw new Error('Bad Response status: ' + response.status);
     }
-    const refreshToken: any = response.headers.get('RefreshToken');
-    this.updateToken(refreshToken);
     return response.body;
   }
 
@@ -122,27 +120,14 @@ export class CommonDataService {
         handled: true,
         isCustomError: false
       };
-      return Observable.throw(httpError);
+      // return Observable.throw(httpError);
+      throwError(httpError);
     } else {
       return this.handleServerError(error);
     }
   }
 
-  public handleClientApiError = (error: any): any => {
-    this.subscriptionService.announceApplicationHalt(null);
-    const errorMessage = error.error || error.message;
-    const httpError: HttpError = {
-      message: errorMessage,
-      url: error.url,
-      statusCode: error.status,
-      statusText: error.statusText,
-      handled: false,
-      isCustomError: false
-    };
-    return Observable.throw(httpError);
-  }
   public handleServerError = (error: any): any => {
-    const refreshToken: any = error.headers.get('RefreshToken');
     const applicationError: any = error.headers.get('Application-Error');
     const customError: any = error.headers.get('IsCustomErrorObject');
     let serverError: any; // = error.json(); // error.json() is not working for plain text error message.
@@ -166,8 +151,8 @@ export class CommonDataService {
       isCustomError = true;
     }
 
-    let errorMessage = applicationError || modelStateErrors || error.message;
-    let httpError: HttpError = {
+    const errorMessage = applicationError || modelStateErrors || error.message;
+    const httpError: HttpError = {
       message: errorMessage,
       url: error.url,
       statusCode: error.status,
@@ -184,41 +169,33 @@ export class CommonDataService {
       httpError.handled = true;
       this.loggerService.error(httpError.message, null, httpError.url, true, false);
       this.subscriptionService.announceApplicationHalt(httpError.message);
-      return Observable.throw(httpError);
+      throwError(httpError); // return Observable.throw(httpError);
     }
 
-    this.updateToken(refreshToken);
+
     if (error.status === 401 || applicationError) {
       this.loggerService.error(httpError.message, null, httpError.url, true, false);
       if (error.status === 401) {
         this.subscriptionService.announceApplicationHalt(httpError.message);
       }
       httpError.handled = true;
-      return Observable.throw(httpError);
+      throwError(httpError); // return Observable.throw(httpError);
     } else if (error.status === 403) {
       this.loggerService.error(httpError.message, null, httpError.url, true, false);
       httpError.handled = true;
-      return Observable.throw(httpError);
+      throwError(httpError); // return Observable.throw(httpError);
     } else if (error.status >= 400 && error.status < 417) { // client errors or validation errors
-      return Observable.throw(httpError);
+      throwError(httpError); // return Observable.throw(httpError);
     } else {
       httpError.handled = true;
       if (httpError.statusCode === 0 && httpError.url == null && !(httpError.message instanceof String)) {
         httpError.message = 'Connection problem';
       }
       this.loggerService.error(httpError.message, null, httpError.url, true, false);
-      return Observable.throw(httpError);
+      throwError(httpError); // return Observable.throw(httpError);
     }
   }
 
-  private updateToken = (refreshToken: any): void => {
-    if (refreshToken) {
-      const tokenStartKey = 7;
-      const tokenEndKey = 7;
-      refreshToken = refreshToken.substr(tokenStartKey, refreshToken.length - (tokenStartKey + tokenEndKey));
-      this.tokenService.setToken(refreshToken);
-    }
-  }
   // separate method for parsing errors into a single flat array
   public parseErrors = (response: any): any => {
     const errors: any = [];

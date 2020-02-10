@@ -1,5 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // our service
 import { BaseService } from '../base';
@@ -63,22 +64,29 @@ export class AuthenticationService extends BaseService {
         const data = { userName: user.userName, password: user.password };
         return this.commonDataService
             .post(data, 'api/jwt/token', null, true)
-            .map((response: any) => <Token>response)
-            .map((token: Token) => {
-                this.tokenService.setToken(token.access_token);
-                if (!isDummyUser) {
-                    this.isLoggedIn = true;
-                    this.isloggingOut = false;
-                    // get current user profile
-                }
-                this.user.userName = '';
-                this.user.password = '';
-            });
+            .pipe(
+                map(this.convertData)
+            );
+
+        // .map((response: any) => <Token>response)
+        // .map((token: Token) => {
+        //     this.tokenService.setToken(token.access_token);
+        //     if (!isDummyUser) {
+        //         this.isLoggedIn = true;
+        //         this.isloggingOut = false;
+        //         // get current user profile
+        //     }
+        //     this.user.userName = '';
+        //     this.user.password = '';
+        // });
     }
 
-    public refreshToken = (): any => {
-        return this.commonDataService
-            .post(null, 'api/token/refreshtoken', null, false, 'text');
+    public convertData = (response: any): any => {
+        const token: Token = response as Token;
+        this.tokenService.setToken(token.access_token);
+        this.user.userName = '';
+        this.user.password = '';
     }
+
 
 }

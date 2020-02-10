@@ -15,7 +15,7 @@ export class SiteSettingService {
     public constructor(private locationStrategy: LocationStrategy
     ) {
         this.isProduction = environment.production;
-        this.serviceUri = environment.baseUrl;
+        this.serviceUri = environment.baseUrl + '/';
     }
 
     public authSettings(): IAuthSetting {

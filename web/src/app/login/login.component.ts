@@ -38,8 +38,6 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.router.navigateByUrl('/helpdesk');
-
     this.user.userName = this.userName;
     this.user.password = this.password;
 

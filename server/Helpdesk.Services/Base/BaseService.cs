@@ -1,4 +1,5 @@
-﻿using Helpdesk.Filters;
+﻿using Helpdesk.Extensions;
+using Helpdesk.Filters;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,21 @@ namespace Helpdesk.Services.Base
     [ResponseFilter()]
     public abstract class BaseService : ControllerBase
     {
-        public int LoginUserId { get; }
+        private int? _loggedInUserId;
+        public int LoginUserId {
+            get
+            {
+                return _loggedInUserId ?? FindLoggedInUserId();
+            } 
+        }
+
+        private int FindLoggedInUserId()
+        {
+            if (HttpContext != null)
+            {
+                _loggedInUserId = HttpContext.User.GetLoggedInUserId();
+            }
+            return _loggedInUserId ?? 0;
+        }
     }
 }

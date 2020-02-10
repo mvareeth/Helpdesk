@@ -33,7 +33,7 @@ import { LoginComponent } from './login/login.component';
     //
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [httpInterceptorProviders],
+  // providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
