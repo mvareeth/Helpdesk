@@ -7,12 +7,12 @@ namespace Helpdesk.Configuration
     public class AppSettings
     {
         // all apps setting properties will be here.
-        public string SASClientURLs { get; set; }
-        public string[] SASClientURLArray
+        public string ClientURLs { get; set; }
+        public string[] ClientURLArray
         {
             get
             {
-                return SASClientURLs.Split(',');
+                return ClientURLs.Split(',');
             }
         }
     }
