@@ -11,17 +11,14 @@ export class HelpdeskService extends BaseService {
     }
 
     public getOwnTickets() {
-        return this.commonDataService.get(this.getURL('owntickets'), false)
-            .map((response: any) => response);
+        return this.commonDataService.get(this.getURL('owntickets'), false);
     }
 
     public getTeamTickets() {
-        return this.commonDataService.get(this.getURL('teamtickets'), false)
-            .map((response: any) => response);
+        return this.commonDataService.get(this.getURL('teamtickets'), false);
     }
 
     public getTicket(ticketId: number) {
-        return this.commonDataService.get(this.getURL() + '/' + ticketId, false)
-            .map((response: any) => response);
+        return this.commonDataService.get(this.getURL() + '/' + ticketId, false);
     }
 }
