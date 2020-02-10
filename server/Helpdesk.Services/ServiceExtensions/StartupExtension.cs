@@ -20,10 +20,10 @@ namespace Helpdesk.Services
         {
             CIOC.Configure(services);
         }
-        public static void ConfigureCors(this IServiceCollection services)
+        public static void ConfigureCors(this IServiceCollection services, string allowSpecificOrigin)
         {
             services.AddCors(options => {
-                options.AddPolicy("AllowSpecificOrigin",
+                options.AddPolicy(allowSpecificOrigin,
                     builder => {
                         builder.WithOrigins(ServingURLs)
                             .AllowAnyMethod()
