@@ -98,7 +98,7 @@ namespace Helpdesk.Security.Token
             };
 
            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, identityUser.UserId.ToString()));
-      
+
             return claims;
         }
 

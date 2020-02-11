@@ -120,8 +120,7 @@ export class CommonDataService {
         handled: true,
         isCustomError: false
       };
-      // return Observable.throw(httpError);
-      throwError(httpError);
+      return throwError(httpError);
     } else {
       return this.handleServerError(error);
     }
@@ -169,7 +168,7 @@ export class CommonDataService {
       httpError.handled = true;
       this.loggerService.error(httpError.message, null, httpError.url, true, false);
       this.subscriptionService.announceApplicationHalt(httpError.message);
-      throwError(httpError); // return Observable.throw(httpError);
+      return throwError(httpError); 
     }
 
 
@@ -179,20 +178,20 @@ export class CommonDataService {
         this.subscriptionService.announceApplicationHalt(httpError.message);
       }
       httpError.handled = true;
-      throwError(httpError); // return Observable.throw(httpError);
+      return throwError(httpError); 
     } else if (error.status === 403) {
       this.loggerService.error(httpError.message, null, httpError.url, true, false);
       httpError.handled = true;
-      throwError(httpError); // return Observable.throw(httpError);
-    } else if (error.status >= 400 && error.status < 417) { // client errors or validation errors
-      throwError(httpError); // return Observable.throw(httpError);
+      return throwError(httpError); 
+    } else if (error.status >= 400 && error.status < 417) { // client errors or validation errors      
+       return throwError(httpError);  
     } else {
       httpError.handled = true;
       if (httpError.statusCode === 0 && httpError.url == null && !(httpError.message instanceof String)) {
         httpError.message = 'Connection problem';
       }
       this.loggerService.error(httpError.message, null, httpError.url, true, false);
-      throwError(httpError); // return Observable.throw(httpError);
+      return throwError(httpError); // return Observable.throw(httpError);
     }
   }
 

@@ -10,16 +10,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { HttpClient } from '@angular/common/http';
-import { AppService } from '../services/app.service';
+
 import { UtilService } from '../services/util.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 
-import { StaffLoginComponent } from './staff-login.component';
+import { LoginComponent } from './login.component';
 
-describe('StaffLoginComponent', () => {
-  let component: StaffLoginComponent;
-  let fixture: ComponentFixture<StaffLoginComponent>;
+describe('LoginComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,15 +27,15 @@ describe('StaffLoginComponent', () => {
         CalendarModule, ConfirmDialogModule, ToastModule,
         AgGridModule.withComponents([])],
       providers: [
-        HttpClient, AppService, UtilService, ConfirmationService, MessageService
+        HttpClient, UtilService, ConfirmationService, MessageService
       ],
-      declarations: [StaffLoginComponent]
+      declarations: [LoginComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StaffLoginComponent);
+    fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

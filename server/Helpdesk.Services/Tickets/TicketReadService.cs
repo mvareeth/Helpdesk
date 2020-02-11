@@ -32,7 +32,7 @@ namespace Helpdesk.Services.Tickets
         /// get full list of own tickets.
         /// </summary>
         /// <returns>get own ticket list.</returns>
-        [HttpGet("owntickets/{userId:int}")]
+        [HttpGet("owntickets")]
         [ProducesResponseType(typeof(Task<IActionResult>), 200)]
         public async Task<IActionResult> GetOwnHelpdeskList()
         {
@@ -43,7 +43,7 @@ namespace Helpdesk.Services.Tickets
         /// get all All helpdesk ticket belongs to that team.
         /// </summary>
           /// <returns></returns>
-        [HttpGet("teamtickets/{userId:int}")]
+        [HttpGet("teamtickets")]
         [ProducesResponseType(typeof(Task<IActionResult>), 200)]
         public async Task<IActionResult> GetAllHelpdeskList()
         {

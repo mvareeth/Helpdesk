@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 // our service
 import { BaseService } from '../base';
@@ -14,7 +14,6 @@ import { SubscriptionService } from '../subscription';
 export class AuthenticationService extends BaseService {
     private user: LoginUser;
     private isLoggedIn = false;
-    private isVerifiedIn = false;
     private isloggingOut = false; // whenever the user clicked on the logout button but logout is not yet completed.
     public redirectUrl: string = '';
 
@@ -67,18 +66,6 @@ export class AuthenticationService extends BaseService {
             .pipe(
                 map(this.convertData)
             );
-
-        // .map((response: any) => <Token>response)
-        // .map((token: Token) => {
-        //     this.tokenService.setToken(token.access_token);
-        //     if (!isDummyUser) {
-        //         this.isLoggedIn = true;
-        //         this.isloggingOut = false;
-        //         // get current user profile
-        //     }
-        //     this.user.userName = '';
-        //     this.user.password = '';
-        // });
     }
 
     public convertData = (response: any): any => {
@@ -87,6 +74,4 @@ export class AuthenticationService extends BaseService {
         this.user.userName = '';
         this.user.password = '';
     }
-
-
 }

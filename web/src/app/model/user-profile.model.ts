@@ -1,4 +1,4 @@
-export interface UserProfile {
+export interface UserProfileModel {
     UserId: number;
     FirstName: string;
     MiddleName: string;

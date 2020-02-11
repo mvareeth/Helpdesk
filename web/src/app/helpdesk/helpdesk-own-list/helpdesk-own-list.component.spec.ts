@@ -10,7 +10,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { AppService } from '../../services/app.service';
 import { UtilService } from '../../services/util.service';
 
 import { HelpdeskOwnListComponent } from './helpdesk-own-list.component';
@@ -25,7 +24,7 @@ describe('RankListComponent', () => {
         DropdownModule, CalendarModule, ConfirmDialogModule, ToastModule,
         AgGridModule.withComponents([])],
       providers: [
-        HttpClient, Location, AppService, UtilService
+        HttpClient, Location, UtilService
       ],
       declarations: [HelpdeskOwnListComponent]
     })

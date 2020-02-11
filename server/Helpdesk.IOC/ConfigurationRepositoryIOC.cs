@@ -1,4 +1,5 @@
 ﻿using Helpdesk.Repository.Clients;
+using Helpdesk.Repository.Security;
 using Helpdesk.Repository.Tickets;
 using Helpdesk.Repository.User;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace Helpdesk.IOC
             this.ConfigureUserRepository(services);
             this.ConfigureTicketRepository(services);
             this.ConfigureClientRepository(services);
+            this.ConfigureAccountRepository(services);
         }
 
         private void ConfigureTicketRepository(IServiceCollection services)
@@ -31,6 +33,11 @@ namespace Helpdesk.IOC
         private void ConfigureClientRepository(IServiceCollection services)
         {
             services.AddScoped<IClientReadRepository, ClientReadRepository>();
+        }
+
+        private void ConfigureAccountRepository(IServiceCollection services)
+        {
+            services.AddScoped<ISecurityReadRepository, SecurityReadRepository>();
         }
     }
 }

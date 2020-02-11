@@ -1,6 +1,6 @@
-import { UserProfile } from './user-profile.model';
+import { UserProfileModel } from './user-profile.model';
 
-export interface TicketDetailModel {
+export class TicketDetailModel {
     /// <summary>
     /// The Id for this ticket
     /// </summary>
@@ -67,7 +67,7 @@ export interface TicketDetailModel {
     /// <summary>
     /// list of technicians working on this ticket
     /// </summary>
-    technicians: UserProfile[];
+    assigedTechnician: UserProfileModel;
     /// <summary>
     /// client information of the ticket
     /// </summary>

@@ -1,4 +1,4 @@
-export interface State {
-    Id: number;
-    Name: string;
+export interface StateModel {
+    id: number;
+    name: string;
 }

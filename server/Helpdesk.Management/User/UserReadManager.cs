@@ -20,13 +20,22 @@ namespace Helpdesk.Management.User
             this.teamMapper = teamMapper;
             this.userProfileMapper = userProfileMapper;
         }
+        /// <summary>
+        /// Get the team based on the team id
+        /// </summary>
+        /// <param name="teamId">team id</param>
+        /// <returns>team list</returns>
         public IEnumerable<TeamModel> GetTeam(int teamId)
         {
             var team = userReadRepository.GetTeam(teamId);
             var teamModel = teamMapper.EntityToModel(team);
             return teamModel;
         }
-
+        /// <summary>
+        /// Get the user profile based on the user id
+        /// </summary>
+        /// <param name="userId">user id</param>
+        /// <returns>user profile</returns>
         public UserProfileModel GetUser(int userId)
         {
             var userProfile = userReadRepository.GetUser(userId);

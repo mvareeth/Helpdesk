@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Helpdesk.Entities
 {
     /// <summary>
-    /// A Technician and information
+    /// A User profile and information
     /// </summary>
     public class UserProfile 
     {
