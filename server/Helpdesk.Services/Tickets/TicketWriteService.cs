@@ -21,7 +21,7 @@ namespace Helpdesk.Services.Tickets
 
         [HttpPost("saveTicket")]
         [ValidateModel]
-        public async Task<IActionResult> SaveTicket([FromBody] TicketDetailModel ticket)
+        public async Task<IActionResult> SaveTicket([FromBody] TicketModel ticket)
         {
             var response = await Task.Run(() => ticketWriteManager.SaveTicket(this.LoginUserId, ticket));
             return new OkObjectResult(response);

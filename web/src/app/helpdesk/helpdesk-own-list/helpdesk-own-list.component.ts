@@ -18,20 +18,21 @@ export class HelpdeskOwnListComponent implements OnInit {
   public helpdeskId: number;
 
   constructor(private helpdeskService: HelpdeskService) {
-    this.rankListGrid();
+    this.helpdeskListGrid();
     this.getOwnTicketList();
   }
 
   ngOnInit() {
   }
 
-  private getOwnTicketList() {
+  private getOwnTicketList(isRefresh: boolean = false) {
     this.helpdeskService.getOwnTickets()
       .subscribe(data => {
         this.ticketList = data;
+        if (isRefresh) {
+          this.ticketListGridApi.updateRowData({update:this.ticketList});
+        }
       });
-    // this.ticketList = [];
-    // this.ticketList.push({ id: 100, title: 'test', description: 'First ', complexity: 1, priority: 1, status: 'opem', assignedTo: '' });
   }
 
   public onGridReady(params) {
@@ -41,7 +42,7 @@ export class HelpdeskOwnListComponent implements OnInit {
     params.api.sizeColumnsToFit();
   }
 
-  private rankListGrid() {
+  private helpdeskListGrid() {
     this.ticketListColumnDefs = [
       {
         headerName: 'Id',
@@ -108,6 +109,7 @@ export class HelpdeskOwnListComponent implements OnInit {
   }
 
   public hidePopupWindow() {
+    this.getOwnTicketList(true);
     this.helpdeskId = undefined;
     this.showDialog = false;
   }

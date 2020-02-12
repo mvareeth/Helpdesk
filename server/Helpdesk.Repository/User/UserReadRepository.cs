@@ -13,14 +13,14 @@ namespace Helpdesk.Repository.User
             this.uow = uow;
         }
 
-        public UserProfile GetUser(int userId)
+        public UserProfileEntity GetUser(int userId)
         {
-            return uow.Query<UserProfile>()
+            return uow.Query<UserProfileEntity>()
                 .Where(x => x.Id == userId).FirstOrDefault();
         }
-        public IQueryable<Team> GetTeam(int teamId)
+        public IQueryable<TeamEntity> GetTeam(int teamId)
         {
-            return uow.Query<Team>()
+            return uow.Query<TeamEntity>()
                 .Where(x => x.TeamId == teamId);
         }
     }

@@ -8,6 +8,7 @@ namespace Helpdesk.Repository.Tickets
 {
     public interface ITicketWriteRepository
     {
-        Task<Ticket> SaveTicket(Ticket ticket);
+        Task<TicketEntity> AddTicket(TicketEntity ticket);
+        Task<TicketEntity> UpdateTicket(TicketEntity ticket);
     }
 }

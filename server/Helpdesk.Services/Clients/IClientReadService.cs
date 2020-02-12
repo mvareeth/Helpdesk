@@ -9,5 +9,6 @@ namespace Helpdesk.Services.Clients
 	public interface IClientReadService
 	{
 		Task<IActionResult> GetClientDetail(int clientId);
+		Task<IActionResult> GetClients();
 	}
 }

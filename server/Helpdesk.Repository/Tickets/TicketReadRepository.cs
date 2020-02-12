@@ -13,33 +13,33 @@ namespace Helpdesk.Repository.Tickets
             this.uow = uow;
         }
 
-        public IQueryable<Ticket> GetOwnHelpdeskList(int userId)
+        public IQueryable<TicketEntity> GetOwnHelpdeskList(int userId)
         {
             var query = GetOwnHelpdeskListQuery(userId);
 
             return query;
         }
 
-        public IQueryable<Ticket> GetAllHelpdeskList()
+        public IQueryable<TicketEntity> GetAllHelpdeskList()
         {
             var query = GetAllHelpdeskListQuery();
             return query;
         }
-        public Ticket GetTicket(int ticketId)
+        public TicketEntity GetTicket(int ticketId)
         {
-            var ticket = uow.Query<Ticket>().FirstOrDefault(x => x.Id == ticketId);
+            var ticket = uow.Query<TicketEntity>().FirstOrDefault(x => x.Id == ticketId);
             return ticket;
         }
 
-        private IQueryable<Ticket> GetOwnHelpdeskListQuery(int userId)
+        private IQueryable<TicketEntity> GetOwnHelpdeskListQuery(int userId)
         {
-            return uow.Query<Ticket>()
+            return uow.Query<TicketEntity>()
                 .Where(x => x.AssigedTechnicianId == userId);
         }
 
-        private IQueryable<Ticket> GetAllHelpdeskListQuery()
+        private IQueryable<TicketEntity> GetAllHelpdeskListQuery()
         {
-            return uow.Query<Ticket>();
+            return uow.Query<TicketEntity>();
         }
 
     }

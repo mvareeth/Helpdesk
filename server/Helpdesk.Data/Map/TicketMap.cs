@@ -14,7 +14,7 @@ namespace Helpdesk.Data
         /// <param name="builder"></param>
         public void TableMap(ModelBuilder builder)
         {
-            builder.Entity<Ticket>()
+            builder.Entity<TicketEntity>()
                 .ToTable("Ticket")
                 .HasKey(x => x.Id);
             InsertTicketRecord(builder);
@@ -25,9 +25,9 @@ namespace Helpdesk.Data
         /// <param name="builder"></param>
         private void InsertTicketRecord(ModelBuilder builder)
         {
-            builder.Entity<Ticket>().HasData
+            builder.Entity<TicketEntity>().HasData
             (
-                new Ticket
+                new TicketEntity
                 {
                     Id = 3001,
                     ClientId = 201,
@@ -41,7 +41,7 @@ namespace Helpdesk.Data
                     CreatedBy = 1001,
                     StatusId = 2
                 },
-                new Ticket
+                new TicketEntity
                 {
                     Id = 3002,
                     ClientId = 202,
@@ -55,7 +55,7 @@ namespace Helpdesk.Data
                     CreatedBy = 1001,
                     StatusId = 3
                 },
-                new Ticket
+                new TicketEntity
                 {
                     Id = 3003,
                     ClientId = 202,

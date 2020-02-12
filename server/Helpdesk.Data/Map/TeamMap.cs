@@ -15,7 +15,7 @@ namespace Helpdesk.Data
         /// <param name="builder"></param>
         public void TableMap(ModelBuilder builder)
         {
-            builder.Entity<Team>()
+            builder.Entity<TeamEntity>()
                 .ToTable("Team")
                 .HasKey(x => x.Id);
 
@@ -27,9 +27,9 @@ namespace Helpdesk.Data
         /// <param name="builder"></param>
         private void InsertTeamRecord(ModelBuilder builder)
         {
-            builder.Entity<Team>().HasData
+            builder.Entity<TeamEntity>().HasData
             (
-                new Team
+                new TeamEntity
                 {
                     Id = 5001,
                     TeamId = 100,
@@ -37,7 +37,7 @@ namespace Helpdesk.Data
                     IsTeamLead = false,
                     TeamName = "Helpdesk"
                 },
-                new Team
+                new TeamEntity
                 {
                     Id = 5002,
                     TeamId = 100,
@@ -45,7 +45,7 @@ namespace Helpdesk.Data
                     IsTeamLead = false,
                     TeamName = "Helpdesk"
                 },
-                new Team
+                new TeamEntity
                 {
                     Id = 5003,
                     TeamId = 100,

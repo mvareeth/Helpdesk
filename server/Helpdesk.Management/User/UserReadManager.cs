@@ -12,9 +12,9 @@ namespace Helpdesk.Management.User
     public class UserReadManager: IUserReadManager
     {
         private readonly IUserReadRepository userReadRepository;
-        private readonly IDataMapper<TeamModel, Team> teamMapper;
-        private readonly IDataMapper<UserProfileModel, UserProfile> userProfileMapper;
-        public UserReadManager(IUserReadRepository userReadRepository, IDataMapper<TeamModel, Team> teamMapper, IDataMapper<UserProfileModel, UserProfile> userProfileMapper)
+        private readonly IDataMapper<TeamModel, TeamEntity> teamMapper;
+        private readonly IDataMapper<UserProfileModel, UserProfileEntity> userProfileMapper;
+        public UserReadManager(IUserReadRepository userReadRepository, IDataMapper<TeamModel, TeamEntity> teamMapper, IDataMapper<UserProfileModel, UserProfileEntity> userProfileMapper)
         {
             this.userReadRepository = userReadRepository;
             this.teamMapper = teamMapper;

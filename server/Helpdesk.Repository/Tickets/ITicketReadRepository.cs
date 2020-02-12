@@ -6,8 +6,8 @@ namespace Helpdesk.Repository.Tickets
 {
     public interface ITicketReadRepository
     {
-        public IQueryable<Ticket> GetOwnHelpdeskList(int userId);
-        public IQueryable<Ticket> GetAllHelpdeskList();
-        public Ticket GetTicket(int ticketId);
+        public IQueryable<TicketEntity> GetOwnHelpdeskList(int userId);
+        public IQueryable<TicketEntity> GetAllHelpdeskList();
+        public TicketEntity GetTicket(int ticketId);
     }
 }

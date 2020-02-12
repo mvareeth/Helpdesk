@@ -2,6 +2,7 @@
 using Helpdesk.Model;
 using Helpdesk.Repository.Clients;
 using Helpdesk.Entities;
+using System.Collections.Generic;
 
 namespace Helpdesk.Management.Clients
 {
@@ -9,17 +10,23 @@ namespace Helpdesk.Management.Clients
     {
 
         private readonly IClientReadRepository clientReadRepository;
-        private readonly IDataMapper<ClientDetailModel, Client> clientMapper;
-        public ClientReadManager(IClientReadRepository clientReadRepository, IDataMapper<ClientDetailModel, Client> clientMapper)
+        private readonly IDataMapper<ClientDetailViewModel, ClientEntity> clientMapper;
+        public ClientReadManager(IClientReadRepository clientReadRepository, IDataMapper<ClientDetailViewModel, ClientEntity> clientMapper)
         {
             this.clientReadRepository = clientReadRepository;
             this.clientMapper = clientMapper;
         }
-        public ClientDetailModel GetClientDetail(int clientId)
+        public ClientDetailViewModel GetClientDetail(int clientId)
         {
             var clientDetail = clientReadRepository.GetClientDetail(clientId);
             var clientDetailModel = clientMapper.EntityToModel(clientDetail);
             return clientDetailModel;
+        }
+        public IEnumerable<ClientDetailViewModel> GetClients()
+        {
+            var clientList = clientReadRepository.GetClients();
+            var clientListModel = clientMapper.EntityToModel(clientList);
+            return clientListModel;
         }
     }
 }

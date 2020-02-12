@@ -7,8 +7,8 @@ namespace Helpdesk.Management.Tickets
 {
     public interface ITicketReadManager
     {
-        TicketDetailModel GetTicket(int ticketId);
-        IEnumerable<TicketListModel> GetOwnHelpdeskList(int userId);
-        IEnumerable<TicketListModel> GetAllHelpdeskList(int userId);
+        TicketDetailViewModel GetTicket(int ticketId);
+        IEnumerable<TicketListViewModel> GetOwnHelpdeskList(int userId);
+        IEnumerable<TicketListViewModel> GetAllHelpdeskList(int userId);
     }
 }

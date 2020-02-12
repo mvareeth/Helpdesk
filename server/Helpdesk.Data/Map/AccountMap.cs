@@ -14,7 +14,7 @@ namespace Helpdesk.Data.Map
         /// <param name="builder"></param>
         public void TableMap(ModelBuilder builder)
         {
-            builder.Entity<Account>()
+            builder.Entity<AccountEntity>()
                 .ToTable("Account")
                 .HasKey(x => x.Id);
             InsertUserProfileRecord(builder);
@@ -26,23 +26,23 @@ namespace Helpdesk.Data.Map
         /// <param name="builder"></param>
         private void InsertUserProfileRecord(ModelBuilder builder)
         {
-            builder.Entity<Account>().HasData
+            builder.Entity<AccountEntity>().HasData
             (
-                new Account
+                new AccountEntity
                 {
                     Id = 1001,
                     UserName = "Issac",
                     Password = "I100",
                     CreatedDate = DateTime.Now
                 },
-                new Account
+                new AccountEntity
                 {
                     Id = 1002,
                     UserName = "Timothi",
                     Password = "I100",
                     CreatedDate = DateTime.Now
                 },
-                new Account
+                new AccountEntity
                 {
                     Id = 1003,
                     UserName = "Kevin",

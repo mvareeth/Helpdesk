@@ -13,10 +13,14 @@ namespace Helpdesk.Repository.Clients
             this.uow = uow;
         }
 
-        public Client GetClientDetail(int clientId)
+        public ClientEntity GetClientDetail(int clientId)
         {
-            return uow.Query<Client>()
+            return uow.Query<ClientEntity>()
                 .Where(x => x.Id == clientId).FirstOrDefault();
+        }
+        public IQueryable<ClientEntity> GetClients()
+        {
+            return uow.Query<ClientEntity>();
         }
     }
 }

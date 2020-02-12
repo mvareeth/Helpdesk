@@ -14,7 +14,7 @@ namespace Helpdesk.Data
         /// <param name="builder"></param>
         public void TableMap(ModelBuilder builder)
         {
-            builder.Entity<Client>()
+            builder.Entity<ClientEntity>()
                 .ToTable("Client")
                 .HasKey(x => x.Id);
 
@@ -27,9 +27,9 @@ namespace Helpdesk.Data
         /// <param name="builder"></param>
         private void InsertClientRecord(ModelBuilder builder)
         {
-            builder.Entity<Client>().HasData
+            builder.Entity<ClientEntity>().HasData
             (
-                new Client
+                new ClientEntity
                 {
                     Id = 201,
                     FirstName = "Abraham",
@@ -37,7 +37,7 @@ namespace Helpdesk.Data
                     Company = "Delta Airlines",
                     CreatedDate = DateTime.Now
                 },
-                new Client
+                new ClientEntity
                 {
                     Id = 202,
                     FirstName = "Jeevan",

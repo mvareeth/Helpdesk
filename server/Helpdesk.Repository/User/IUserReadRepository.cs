@@ -8,7 +8,7 @@ namespace Helpdesk.Repository.User
 {
     public interface IUserReadRepository
     {
-        UserProfile GetUser(int userId);
-        IQueryable<Team> GetTeam(int teamId);
+        UserProfileEntity GetUser(int userId);
+        IQueryable<TeamEntity> GetTeam(int teamId);
     }
 }

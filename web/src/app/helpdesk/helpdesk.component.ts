@@ -29,6 +29,7 @@ export class HelpdeskComponent implements OnInit {
   }
 
   public hidePopupWindow() {
+    // based on the selected tab we have to call corresponding grid refresh 
     this.showDialog = false;
   }
 

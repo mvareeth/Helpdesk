@@ -25,5 +25,17 @@ namespace Helpdesk.Services.Clients
             var response = await Task.Run(() => clientReadManager.GetClientDetail(clientId));
             return new OkObjectResult(response);
         }
+        /// <summary>
+        /// get the list of clients.
+        /// </summary>
+        /// <returns>get the client list.</returns>
+        [HttpGet("list")]
+        [ProducesResponseType(typeof(Task<IActionResult>), 200)]
+        public async Task<IActionResult> GetClients()
+        {
+            var response = await Task.Run(() => clientReadManager.GetClients());
+            return new OkObjectResult(response);
+        }
+
     }
 }

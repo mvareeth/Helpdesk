@@ -9,6 +9,6 @@ namespace Helpdesk.Services.Tickets
 {
     public interface ITicketWriteService
     {
-        Task<IActionResult> SaveTicket([FromBody] TicketDetailModel ticket);
+        Task<IActionResult> SaveTicket([FromBody] TicketModel ticket);
     }
 }

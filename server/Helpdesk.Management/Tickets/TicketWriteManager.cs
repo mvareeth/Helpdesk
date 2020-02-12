@@ -11,9 +11,11 @@ namespace Helpdesk.Management.Tickets
 {
     public class TicketWriteManager : ITicketWriteManager
     {
+        private readonly ITicketReadRepository ticketReadRepository;
         private readonly ITicketWriteRepository ticketWriteRepository;
-        public TicketWriteManager(ITicketWriteRepository ticketWriteRepository)
+        public TicketWriteManager(ITicketReadRepository ticketReadRepository, ITicketWriteRepository ticketWriteRepository)
         {
+            this.ticketReadRepository = ticketReadRepository;
             this.ticketWriteRepository = ticketWriteRepository;
         }
         /// <summary>
@@ -22,16 +24,37 @@ namespace Helpdesk.Management.Tickets
         /// <param name="loginUserId">user who create this</param>
         /// <param name="ticketModel">model object</param>
         /// <returns></returns>
-        public async Task<TicketDetailModel> SaveTicket(int loginUserId, TicketDetailModel ticketModel)
+        public async Task<TicketModel> SaveTicket(int loginUserId, TicketModel ticketModel)
         {
-            if (ticketModel.Client == null) {
-                ticketModel.Client = new ClientDetailModel();
-                ticketModel.Client.Id = 201;
+            TicketEntity response = null;
+            if (ticketModel.Id.HasValue && ticketModel.Id > 0 )
+            {
+                response = await Task.Run(() => this.UpdateTicket(loginUserId, ticketModel));
             }
-            var ticket = this.MapModelToEntity(loginUserId, ticketModel);
-            var response = await Task.Run(() => ticketWriteRepository.SaveTicket(ticket));
-            ticketModel.Id = response.Id;
+            else
+            {
+                response = await Task.Run(() => this.AddTicket(loginUserId, ticketModel));
+            }
+
+            ticketModel.Id = response?.Id;
             return ticketModel;
+        }
+
+        private async Task<TicketEntity> AddTicket(int loginUserId, TicketModel ticketModel)
+        {
+            var ticket = this.MapModelToEntity(loginUserId, ticketModel);
+            return await Task.Run(() => ticketWriteRepository.AddTicket(ticket));
+        }
+        private async Task<TicketEntity> UpdateTicket(int loginUserId, TicketModel ticketModel)
+        {
+            var ticket = ticketReadRepository.GetTicket(ticketModel.Id.Value);
+            ticket.Title = ticketModel.Title;
+            ticket.Description = ticketModel.Description;
+            ticket.ClientId = ticketModel.ClientId;
+            ticket.StatusId = ticketModel.StatusId;
+            ticket.LastUpdatedBy = loginUserId;
+            ticket.LastUpdatedDate = DateTime.Now;
+            return await Task.Run(() => ticketWriteRepository.UpdateTicket(ticket));
         }
 
         /// <summary>
@@ -40,21 +63,18 @@ namespace Helpdesk.Management.Tickets
         /// <param name="loginUserId">user who create this</param>
         /// <param name="ticketModel">model object</param>
         /// <returns></returns>
-        private Ticket MapModelToEntity(int loginUserId, TicketDetailModel ticketModel)
+        private TicketEntity MapModelToEntity(int loginUserId, TicketModel ticketModel)
         {
-            var ticket = new Ticket
+            var ticket = new TicketEntity
             {
-                ClientId = ticketModel.Client.Id,
+                ClientId = ticketModel.ClientId,
                 Title = ticketModel.Title,
                 Description = ticketModel.Description,
-                Complexity = ticketModel.Complexity,
-
-                Priority = ticketModel.Priority,
+                Complexity = 1,
+                Priority = 1,
                 Notes = ticketModel.Notes,
                 CreatedBy = loginUserId,
                 CreatedDate = DateTime.Now,
-                LastUpdatedBy = loginUserId,
-                LastUpdatedDate = DateTime.Now,
                 StatusId = 1,
                 AssigedTechnicianId = loginUserId,
             };

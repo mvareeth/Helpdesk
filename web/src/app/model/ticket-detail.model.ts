@@ -1,6 +1,7 @@
 import { UserProfileModel } from './user-profile.model';
+import { ClientModel } from './client.model';
 
-export class TicketDetailModel {
+export interface TicketDetailModel {
     /// <summary>
     /// The Id for this ticket
     /// </summary>
@@ -71,5 +72,5 @@ export class TicketDetailModel {
     /// <summary>
     /// client information of the ticket
     /// </summary>
-    client: string;
+    client: ClientModel;
 }

@@ -7,6 +7,7 @@ namespace Helpdesk.Management.Clients
 {
     public interface IClientReadManager
     {
-        ClientDetailModel GetClientDetail(int clientId);
-    }
+        ClientDetailViewModel GetClientDetail(int clientId);
+        IEnumerable<ClientDetailViewModel> GetClients();
+	}
 }

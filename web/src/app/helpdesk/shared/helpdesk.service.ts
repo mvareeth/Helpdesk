@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, switchMap } from 'rxjs/operators';
 import { BaseService, CommonDataService } from 'src/app/shared/services';
 import { TicketDetailModel } from 'src/app/model/ticket-detail.model';
+import { TicketModel } from 'src/app/model/ticket.model';
 
 @Injectable()
 export class HelpdeskService extends BaseService {
@@ -21,8 +22,8 @@ export class HelpdeskService extends BaseService {
         return this.commonDataService.get(this.getURL() + '/' + ticketId, false);
     }
   
-    public saveTicket = (ticketDetailModel : TicketDetailModel): any => {
+    public saveTicket = (ticketModel : TicketModel): any => {
         return this.commonDataService
-            .post(ticketDetailModel, this.getURL('saveTicket'), null, true);
+            .post(ticketModel, this.getURL('saveTicket'), null, true);
     }    
 }

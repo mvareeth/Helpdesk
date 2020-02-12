@@ -12,9 +12,16 @@ namespace Helpdesk.Repository.Tickets
         {
             this.uow = uow;
         }
-        public async Task<Ticket> SaveTicket(Ticket ticket)
+        public async Task<TicketEntity> AddTicket(TicketEntity ticket)
         {
             uow.Add(ticket);
+            await uow.CommitAsync();
+
+            return ticket;
+        }
+        public async Task<TicketEntity> UpdateTicket(TicketEntity ticket)
+        {
+            uow.Update(ticket);
             await uow.CommitAsync();
 
             return ticket;

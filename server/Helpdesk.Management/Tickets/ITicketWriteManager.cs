@@ -14,6 +14,6 @@ namespace Helpdesk.Management.Tickets
         /// <param name="loginUserId">user who create this</param>
         /// <param name="ticketModel">model object</param>
         /// <returns></returns>
-        Task<TicketDetailModel> SaveTicket(int loginUserId, TicketDetailModel ticket);
+        Task<TicketModel> SaveTicket(int loginUserId, TicketModel ticket);
     }
 }

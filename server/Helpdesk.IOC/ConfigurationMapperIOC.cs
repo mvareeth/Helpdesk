@@ -13,13 +13,13 @@ namespace Helpdesk.IOC
         protected void ConfigureMapper(IServiceCollection services)
         {
 
-            services.AddScoped<IDataMapper<TeamModel, Team>, DataMapper<TeamModel, Team>>();
-            services.AddScoped<IDataMapper<UserProfileModel, UserProfile>, DataMapper<UserProfileModel, UserProfile>>();
+            services.AddScoped<IDataMapper<TeamModel, TeamEntity>, DataMapper<TeamModel, TeamEntity>>();
+            services.AddScoped<IDataMapper<UserProfileModel, UserProfileEntity>, DataMapper<UserProfileModel, UserProfileEntity>>();
 
-            services.AddScoped<IDataMapper<TicketListModel, Ticket>, DataMapper<TicketListModel, Ticket>>();
-            services.AddScoped<IDataMapper<TicketDetailModel, Ticket>, DataMapper<TicketDetailModel, Ticket>>();
+            services.AddScoped<IDataMapper<TicketListViewModel, TicketEntity>, DataMapper<TicketListViewModel, TicketEntity>>();
+            services.AddScoped<IDataMapper<TicketDetailViewModel, TicketEntity>, DataMapper<TicketDetailViewModel, TicketEntity>>();
 
-            services.AddScoped<IDataMapper<ClientDetailModel, Client>, DataMapper<ClientDetailModel, Client>>();
+            services.AddScoped<IDataMapper<ClientDetailViewModel, ClientEntity>, DataMapper<ClientDetailViewModel, ClientEntity>>();
         }
     }
 }

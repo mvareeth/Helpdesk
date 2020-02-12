@@ -30,7 +30,11 @@ export interface ClientModel {
     company: string;
 
     /// <summary>
-    /// The address of the client
+    /// The address of th:e client
     /// </summary>
     address: string;
+    /// <summary>
+    /// full name of the client
+    /// </summary>    
+    fullName: string;
 }

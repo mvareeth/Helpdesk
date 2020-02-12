@@ -1,12 +1,13 @@
 ﻿using Helpdesk.Entities;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Helpdesk.Repository.Clients
 {
     public interface IClientReadRepository
     {
-        Client GetClientDetail(int clientId);
+        ClientEntity GetClientDetail(int clientId);
+        IQueryable<ClientEntity> GetClients();
     }
 }

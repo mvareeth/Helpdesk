@@ -7,8 +7,9 @@
       <label for="apl-lst"> Client Name:</label>
     </div>
     <div class="col-sm-5 m-b-1">
-      <input type="text" class="form-control d-inline" name="apllst" id="apl-lst" [(ngModel)]="clientName"
-        [disabled]="!canEdit">
+      <p-dropdown class="dropdown" [options]="clientList" placeholder="Select a client" [disabled]="!canEdit"
+        [(ngModel)]="selectedClient" optionLabel="fullName" id="clientId">
+      </p-dropdown>        
     </div>
   </div>
   <div class="row">

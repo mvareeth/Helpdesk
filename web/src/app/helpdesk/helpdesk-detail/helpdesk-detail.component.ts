@@ -3,6 +3,9 @@ import { HelpdeskService } from '../shared/helpdesk.service';
 import { TicketDetailModel } from 'src/app/model/ticket-detail.model';
 import { HttpError } from 'src/app/shared/services';
 import { MessageService } from 'primeng/api';
+import { TicketModel } from 'src/app/model/ticket.model';
+import { ClientService } from 'src/app/services/client.service';
+import { ClientModel } from 'src/app/model/client.model';
 
 @Component({
   selector: 'app-helpdesk-detail',
@@ -17,48 +20,63 @@ export class HelpdeskDetailComponent implements OnInit {
   public display: boolean = true;
   public popupTitle: string;
 
-  public clientName: string;
+  // public clientName: string;
   public title: string;
   public problemDescription: string;
   public assignedUserFullName: string;
   public workItemStatus: any;
   public workItemStatusList: any;
+  public clientList: any;
+  public selectedClient: any;
 
   public canEdit: boolean = true; // depends on permission we can disable or enable edit
-  public enableSaveButton: boolean;
+  public get enableSaveButton(): boolean {
+    if (this.selectedClient) {
+      return true;
+    }
+  }
 
   public ticketDetail: TicketDetailModel;
 
-  public constructor(private helpdeskService: HelpdeskService, private messageService: MessageService) { }
+  public constructor(private helpdeskService: HelpdeskService, private clientService: ClientService,
+      private messageService: MessageService) { }
 
   public ngOnInit() {
+    this.getStatusList();
+    this.getClientList();    
     if (this.helpdeskId) {
       this.popupTitle = 'Edit Helpdesk Ticket : ' + this.helpdeskId;
       this.getTicketDetail(this.helpdeskId);
     } else {
       this.popupTitle = 'Add Helpdesk Ticket';
-      this.enableSaveButton = true;
     }
-    this.getStatusList();
   }
 
   public save() {
-    if (!this.ticketDetail) {
-      this.ticketDetail = new TicketDetailModel();
+    const  ticketModel = new TicketModel();
+    ticketModel.title = this.title;
+    ticketModel.description = this.problemDescription;
+    ticketModel.clientId = this.selectedClient.id;
+    if (this.ticketDetail) {
+      ticketModel.id = this.ticketDetail.id;
     }
-    this.ticketDetail.title = this.title;
-    this.ticketDetail.description = this.problemDescription;    
-    this.saveTicket(this.ticketDetail);
+    this.saveTicket(ticketModel);
   }
 
   public cancel() {
-    this.closePopup.emit(true);
+    this.closePopup.emit(false);
   }
   private getStatusList() {
     // this.appService.getStatusList()
     //   .subscribe((data: any) => {
     //     this.workItemStatusList = data;
     //   });
+  }
+  private getClientList() {
+    this.clientService.getClientList()
+      .subscribe((data: any) => {
+        this.clientList = data;
+      });
   }
 
   public hidePopup() {
@@ -68,18 +86,15 @@ export class HelpdeskDetailComponent implements OnInit {
 
   private getTicketDetail(ticketId: number) {
     this.helpdeskService.getTicket(ticketId)
-    .subscribe(data => {
+    .subscribe((data : TicketDetailModel ) => {
       this.ticketDetail = data;
+      this.selectedClient = data.client as ClientModel;
       this.populateData(data);
-      this.enableSaveButton = true;
     });
   }
 
   private populateData(ticketDetail: TicketDetailModel) {
-    const client = (ticketDetail.client as any);
-    if (client !== undefined) {
-      this.clientName = client.firstName + ' ' + client.LastName;
-    }
+    this.selectedClient.fullName = this.selectedClient.firstName + ' ' + this.selectedClient.lastName;
     this.title = ticketDetail.title;
     this.problemDescription = ticketDetail.description;
     const assigedTechnician = (ticketDetail.assigedTechnician as any);
@@ -88,7 +103,7 @@ export class HelpdeskDetailComponent implements OnInit {
     }
   }
 
-  private saveTicket(ticketDetail: TicketDetailModel) {
+  private saveTicket(ticketDetail: TicketModel) {
     this.helpdeskService.saveTicket(ticketDetail)
       .subscribe(
         (data: any) => {

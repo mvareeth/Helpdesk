@@ -18,8 +18,8 @@ namespace Helpdesk.Management.Tickets
         private readonly ITicketReadRepository ticketReadRepository;
         private readonly IUserReadManager userReadManager;
         private readonly IClientReadManager clientReadManager;
-        private IDataMapper<TicketListModel, Ticket> ticketListMapper;
-        private IDataMapper<TicketDetailModel, Ticket> ticketDetailMapper;
+        private IDataMapper<TicketListViewModel, TicketEntity> ticketListMapper;
+        private IDataMapper<TicketDetailViewModel, TicketEntity> ticketDetailMapper;
         /// <summary>
         /// constructor with different repository, management and mapper interfaces.
         /// </summary>
@@ -29,7 +29,7 @@ namespace Helpdesk.Management.Tickets
         /// <param name="ticketListMapper"></param>
         /// <param name="ticketDetailMapper"></param>
         public TicketReadManager(ITicketReadRepository ticketReadRepository, IUserReadManager userReadManager, IClientReadManager clientReadManager,
-            IDataMapper<TicketListModel, Ticket> ticketListMapper, IDataMapper<TicketDetailModel, Ticket> ticketDetailMapper)
+            IDataMapper<TicketListViewModel, TicketEntity> ticketListMapper, IDataMapper<TicketDetailViewModel, TicketEntity> ticketDetailMapper)
         {
             this.ticketReadRepository = ticketReadRepository;
             this.userReadManager = userReadManager;
@@ -42,7 +42,7 @@ namespace Helpdesk.Management.Tickets
         /// </summary>
         /// <param name="userId">user id - owner of the ticket</param>
         /// <returns>list of tickets</returns>
-        public IEnumerable<TicketListModel> GetOwnHelpdeskList(int userId)
+        public IEnumerable<TicketListViewModel> GetOwnHelpdeskList(int userId)
         {
             var tickets = ticketReadRepository.GetOwnHelpdeskList(userId).ToList();
             var models = ticketListMapper.EntityToModel(tickets);
@@ -53,7 +53,7 @@ namespace Helpdesk.Management.Tickets
         /// </summary>
         /// <param name="userId">userid to verify whether user is belongs to the team or not</param>
         /// <returns></returns>
-        public IEnumerable<TicketListModel> GetAllHelpdeskList(int userId)
+        public IEnumerable<TicketListViewModel> GetAllHelpdeskList(int userId)
         {
             int teamId = (int)TeamEnum.Helpdesk;
             var teamMembers = userReadManager.GetTeam(teamId).ToList();
@@ -73,7 +73,7 @@ namespace Helpdesk.Management.Tickets
         /// </summary>
         /// <param name="ticketId">ticket id</param>
         /// <returns></returns>
-        public TicketDetailModel GetTicket(int ticketId)
+        public TicketDetailViewModel GetTicket(int ticketId)
         {
             var ticket = ticketReadRepository.GetTicket(ticketId);
 

@@ -22,20 +22,21 @@ export class HelpdeskFullListComponent implements OnInit {
 
 
   constructor(private helpdeskService: HelpdeskService) {
-    this.rankListGrid();
+    this.helpdeskListGrid();
     this.getTeamTicketList();
   }
 
   ngOnInit() {
   }
 
-  private getTeamTicketList() {
+  private getTeamTicketList(isRefresh: boolean = false) {
     this.helpdeskService.getTeamTickets()
       .subscribe(data => {
         this.ticketList = data;
+        if (isRefresh) {
+          this.ticketListGridApi.updateRowData({update:this.ticketList});
+        }        
       });
-    // this.ticketList = [];
-    // this.ticketList.push({ id: 100, title: 'test', description: 'First ', complexity: 1, priority: 1, status: 'opem', assignedTo: '' });
   }
 
   public onGridReady(params) {
@@ -45,7 +46,7 @@ export class HelpdeskFullListComponent implements OnInit {
     params.api.sizeColumnsToFit();
   }
 
-  private rankListGrid() {
+  private helpdeskListGrid() {
     this.ticketListColumnDefs = [
       {
         headerName: 'Id',
@@ -118,6 +119,7 @@ export class HelpdeskFullListComponent implements OnInit {
   }
 
   public hidePopupWindow() {
+    this.getTeamTicketList(true);
     this.helpdeskId = undefined;
     this.showDialog = false;
   }  
