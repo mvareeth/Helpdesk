@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Helpdesk.Model
@@ -28,15 +29,17 @@ namespace Helpdesk.Model
         /// <summary>
         /// status id decides whether it is opened, closed etc.
         /// </summary>
+        [Required]
         public int StatusId { get; set; }
 
         /// <summary>
         /// technician id working on this ticket
         /// </summary>
-        public int AssigedTechnicianId { get; set; }
+        public int? AssigedTechnicianId { get; set; }
         /// <summary>
         /// client information of the ticket
         /// </summary>
+        [Required]
         public int ClientId { get; set; }
     }
 }

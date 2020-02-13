@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-helpdesk',
@@ -6,14 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./helpdesk.component.css']
 })
 export class HelpdeskComponent implements OnInit {
-
+  // @Output() public refreshOwnList: EventEmitter<boolean> = new EventEmitter<boolean>();
+  // @Output() public refreshFullList: EventEmitter<boolean> = new EventEmitter<boolean>();
+   
   public isBusy = false;
   public busyMessage: string;
-  public selectedTab: string = 'myTickeTab';
+  public selectedTab: string = 'myTicketTab';
   public showDialog: boolean = false;
   public helpdeskId: number;
 
-  public constructor() { }
+  public constructor(private router: Router) { }
 
   public ngOnInit() {
   }
@@ -25,11 +28,12 @@ export class HelpdeskComponent implements OnInit {
   public addTicket() {
     this.helpdeskId = undefined;
     this.showDialog = true;
-    this.selectedTab = 'myTickeTab';
   }
 
   public hidePopupWindow() {
-    // based on the selected tab we have to call corresponding grid refresh 
+    this.selectedTab = 'myTicketTab';
+    this.router.navigateByUrl('/helpdesk/own'); 
+    // Todo: based on the selected tab we have to call corresponding grid refresh 
     this.showDialog = false;
   }
 

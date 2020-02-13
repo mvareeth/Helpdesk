@@ -1,5 +1,5 @@
 <div class="app-container">
-  <div class="row">
+  <div class="row" style="padding-left: 1em;">
     <ag-grid-angular #agGrid id="rankListGrid" class="ag-theme-balham" [columnDefs]="ticketListColumnDefs"
       style="width: 100%; height: 600px;" (gridReady)="onGridReady($event)" [rowData]="ticketList">
     </ag-grid-angular>
@@ -8,7 +8,6 @@
 
   <div class="row">
     <app-helpdesk-detail *ngIf="showDialog" (closePopup)="hidePopupWindow()" [helpdeskId] = "helpdeskId">
-
     </app-helpdesk-detail>
   </div>
   

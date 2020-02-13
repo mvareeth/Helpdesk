@@ -42,5 +42,15 @@ namespace Helpdesk.Management.User
             var userProfileModel = userProfileMapper.EntityToModel(userProfile);
             return userProfileModel;
         }
+        /// <summary>
+        /// get list of technicians
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<UserProfileModel> GetTechnicians()
+        {
+            var userProfileList = userReadRepository.GetUsers();
+            var userProfileListModel = userProfileMapper.EntityToModel(userProfileList);
+            return userProfileListModel;
+        }
     }
 }

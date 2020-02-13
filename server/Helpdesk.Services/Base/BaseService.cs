@@ -19,7 +19,10 @@ namespace Helpdesk.Services.Base
                 return _loggedInUserId ?? FindLoggedInUserId();
             } 
         }
-
+        /// <summary>
+        /// get the logged in user id from httpconext
+        /// </summary>
+        /// <returns></returns>
         private int FindLoggedInUserId()
         {
             if (HttpContext != null)

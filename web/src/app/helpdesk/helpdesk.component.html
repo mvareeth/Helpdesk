@@ -7,19 +7,19 @@
       <p>{{ busyMessage }}</p>
     </div>
   </div>
-  <div class="row right">
+  <div class="row right" style="padding-right: 1em;">
     <div class="right">
       <button type="button" class="btn btn-primary right" (click)="addTicket()">Add Ticket</button>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" style="margin: 0em;">
     <div class="col-md-12 m-t-1 p-r-1">
       <ul class="nav nav-tabs">
-        <li id="myTickeTab" [class.active]="selectedTab === 'myTickeTab'" (click)="onSelect('myTickeTab')">
+        <li id="myTickeTab" [class.active]="selectedTab === 'myTicketTab'" (click)="onSelect('myTicketTab')">
           <a [routerLink]="['own']">Own Tickets</a>
         </li>
-        <li id="allTickeTab" [class.active]="selectedTab === 'allTickeTab'" (click)="onSelect('allTickeTab')">
+        <li id="allTickeTab" [class.active]="selectedTab === 'allTicketTab'" (click)="onSelect('allTicketTab')">
           <a [routerLink]="['all']">All Tickets</a>
         </li>
       </ul>

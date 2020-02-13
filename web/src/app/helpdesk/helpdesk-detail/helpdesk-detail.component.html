@@ -1,4 +1,4 @@
-<p-dialog [(header)]="popupTitle" [(visible)]="display" [style]="{width: '40%', height: '40%'}" onHide="hidePopup()" [modal]="true" [closable]="false">
+<p-dialog [(header)]="popupTitle" [(visible)]="display" [style]="{width: '50%', height: '40%'}" onHide="hidePopup()" [modal]="true" [closable]="false">
 
   <div class="row">
 
@@ -35,8 +35,9 @@
       <label for="apl-lst"> Assigned To:</label>
     </div>
     <div class="col-sm-5 m-b-1">
-      <input type="text" class="form-control d-inline" name="apllst" id="apl-lst" [(ngModel)]="assignedUserFullName"
-        [disabled]="!canEdit">
+        <p-dropdown class="dropdown" [options]="technicianList" placeholder="Select a technician" [disabled]="!canEdit"
+        [(ngModel)]="selectedTechnician" optionLabel="fullName" id="technicianId">
+      </p-dropdown>          
     </div>
   </div>
 
@@ -46,7 +47,7 @@
         Status:</label></div>
     <div class="col-sm-5 m-b-1">
       <p-dropdown class="dropdown" [options]="workItemStatusList" placeholder="Work Item Status" [disabled]="!canEdit"
-        [(ngModel)]="workItemStatus" optionLabel="Name" id="statusId">
+        [(ngModel)]="workItemStatus" optionLabel="name" id="statusId">
       </p-dropdown>
     </div>
 

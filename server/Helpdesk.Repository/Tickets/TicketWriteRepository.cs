@@ -12,6 +12,11 @@ namespace Helpdesk.Repository.Tickets
         {
             this.uow = uow;
         }
+        /// <summary>
+        /// add a new ticket
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
         public async Task<TicketEntity> AddTicket(TicketEntity ticket)
         {
             uow.Add(ticket);
@@ -19,6 +24,11 @@ namespace Helpdesk.Repository.Tickets
 
             return ticket;
         }
+        /// <summary>
+        /// update the existing ticket
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
         public async Task<TicketEntity> UpdateTicket(TicketEntity ticket)
         {
             uow.Update(ticket);

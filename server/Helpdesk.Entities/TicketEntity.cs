@@ -83,6 +83,6 @@ namespace Helpdesk.Entities
         /// <summary>
         /// technicians working on this ticket
         /// </summary>
-        public int? AssigedTechnicianId { get; set; }
+        public int? AssignedTechnicianId { get; set; }
     }
 }

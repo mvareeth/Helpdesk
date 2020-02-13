@@ -39,12 +39,23 @@ namespace Helpdesk.Management.Tickets
             ticketModel.Id = response?.Id;
             return ticketModel;
         }
-
+        /// <summary>
+        /// Add a new ticket
+        /// </summary>
+        /// <param name="loginUserId"></param>
+        /// <param name="ticketModel"></param>
+        /// <returns>return the added ticket</returns>
         private async Task<TicketEntity> AddTicket(int loginUserId, TicketModel ticketModel)
         {
             var ticket = this.MapModelToEntity(loginUserId, ticketModel);
             return await Task.Run(() => ticketWriteRepository.AddTicket(ticket));
         }
+        /// <summary>
+        /// update the ticket status
+        /// </summary>
+        /// <param name="loginUserId"></param>
+        /// <param name="ticketModel"></param>
+        /// <returns>return the updated record</returns>
         private async Task<TicketEntity> UpdateTicket(int loginUserId, TicketModel ticketModel)
         {
             var ticket = ticketReadRepository.GetTicket(ticketModel.Id.Value);
@@ -52,6 +63,7 @@ namespace Helpdesk.Management.Tickets
             ticket.Description = ticketModel.Description;
             ticket.ClientId = ticketModel.ClientId;
             ticket.StatusId = ticketModel.StatusId;
+            ticket.AssignedTechnicianId = ticketModel.AssigedTechnicianId ?? loginUserId;
             ticket.LastUpdatedBy = loginUserId;
             ticket.LastUpdatedDate = DateTime.Now;
             return await Task.Run(() => ticketWriteRepository.UpdateTicket(ticket));
@@ -75,8 +87,8 @@ namespace Helpdesk.Management.Tickets
                 Notes = ticketModel.Notes,
                 CreatedBy = loginUserId,
                 CreatedDate = DateTime.Now,
-                StatusId = 1,
-                AssigedTechnicianId = loginUserId,
+                StatusId = ticketModel.StatusId,
+                AssignedTechnicianId = ticketModel.AssigedTechnicianId ??  loginUserId,
             };
             return ticket;
         }

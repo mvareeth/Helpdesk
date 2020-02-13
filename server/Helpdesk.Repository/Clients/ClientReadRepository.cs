@@ -12,12 +12,20 @@ namespace Helpdesk.Repository.Clients
         {
             this.uow = uow;
         }
-
+        /// <summary>
+        /// get a client details based on clientid
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
         public ClientEntity GetClientDetail(int clientId)
         {
             return uow.Query<ClientEntity>()
                 .Where(x => x.Id == clientId).FirstOrDefault();
         }
+        /// <summary>
+        /// get all client list
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<ClientEntity> GetClients()
         {
             return uow.Query<ClientEntity>();

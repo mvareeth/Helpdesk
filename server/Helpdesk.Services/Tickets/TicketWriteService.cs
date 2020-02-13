@@ -18,7 +18,11 @@ namespace Helpdesk.Services.Tickets
         {
             this.ticketWriteManager = ticketWriteManager;
         }
-
+        /// <summary>
+        /// save ticket using the model
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns>return the saved ticket</returns>
         [HttpPost("saveTicket")]
         [ValidateModel]
         public async Task<IActionResult> SaveTicket([FromBody] TicketModel ticket)

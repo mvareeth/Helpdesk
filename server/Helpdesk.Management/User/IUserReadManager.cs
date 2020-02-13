@@ -20,5 +20,10 @@ namespace Helpdesk.Management.User
         /// <param name="teamId">team id</param>
         /// <returns>team list</returns>
         IEnumerable<TeamModel> GetTeam(int teamId);
+        /// <summary>
+        /// Get the list of technicians
+        /// </summary>
+        /// <returns>technicians list</returns>
+        IEnumerable<UserProfileModel> GetTechnicians();
     }
 }

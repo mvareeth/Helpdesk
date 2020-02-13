@@ -10,5 +10,7 @@ namespace Helpdesk.Repository.User
     {
         UserProfileEntity GetUser(int userId);
         IQueryable<TeamEntity> GetTeam(int teamId);
+
+        IQueryable<UserProfileEntity> GetUsers();
     }
 }

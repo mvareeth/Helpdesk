@@ -36,7 +36,7 @@ namespace Helpdesk.Data
                     Priority = 1,
                     Notes = "Air leak",
                     Description = "Replace the air value if it is damaged",
-                    AssigedTechnicianId = 1001,
+                    AssignedTechnicianId = 1001,
                     CreatedDate = DateTime.Now,
                     CreatedBy = 1001,
                     StatusId = 2
@@ -50,7 +50,7 @@ namespace Helpdesk.Data
                     Priority = 1,
                     Notes = "Air leak",
                     Description = "Replace the air value if it is damaged",
-                    AssigedTechnicianId = 1002,
+                    AssignedTechnicianId = 1002,
                     CreatedDate = DateTime.Now,
                     CreatedBy = 1001,
                     StatusId = 3
@@ -64,7 +64,7 @@ namespace Helpdesk.Data
                     Priority = 1,
                     Notes = "Air leak",
                     Description = "Replace the air value if it is damaged",
-                    AssigedTechnicianId = 1003,
+                    AssignedTechnicianId = 1003,
                     CreatedDate = DateTime.Now,
                     CreatedBy = 1001,
                     StatusId = 3

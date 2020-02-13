@@ -8,6 +8,6 @@ namespace Helpdesk.Model
     /// </summary>
     public class TechnicianModel: UserProfileModel
     {
-
+        // add technician specific properties
     }
 }

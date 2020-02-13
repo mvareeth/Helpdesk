@@ -46,6 +46,11 @@ namespace Helpdesk.Services.Controllers
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// get token to public - the first call to get the token
+        /// </summary>
+        /// <param name="identityUser"></param>
+        /// <returns></returns>
         [HttpPost("token")]
         [AllowAnonymous]
         public async Task<IActionResult> GetToken([FromBody] IdentityUserModel identityUser)
@@ -56,13 +61,22 @@ namespace Helpdesk.Services.Controllers
         #endregion
 
         #region Private Methods 
+        /// <summary>
+        /// create token using claim
+        /// </summary>
+        /// <param name="identityUser"></param>
+        /// <returns></returns>
         private async Task<IActionResult> CreateTokenWithClaim(IdentityUserModel identityUser)
         {
             TokenModel tokenModel = await _tokenProvider.ValidateAndCreateToken(identityUser);
             serverCache.ClearAll(identityUser.UserId);
             return GetTokenResponse(tokenModel);
         }
-
+        /// <summary>
+        /// get the token response
+        /// </summary>
+        /// <param name="tokenModel"></param>
+        /// <returns></returns>
         private IActionResult GetTokenResponse(TokenModel tokenModel)
         {
             if (tokenModel == null || (tokenModel != null && !

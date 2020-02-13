@@ -29,6 +29,11 @@ namespace Helpdesk.Security.Token
         }
 
         #region Public Methods 
+        /// <summary>
+        /// validate the credential and create token
+        /// </summary>
+        /// <param name="identityUser"></param>
+        /// <returns></returns>
         public async Task<TokenModel> ValidateAndCreateToken(IdentityUserModel identityUser)
         {
             IPAddress = identityUser.IPAddress;
@@ -45,7 +50,12 @@ namespace Helpdesk.Security.Token
 
             return await CreateTokenWithClaim(identityUser, identity);
         }
-
+        /// <summary>
+        /// create claim using identity model
+        /// </summary>
+        /// <param name="identityUser"></param>
+        /// <param name="identity"></param>
+        /// <returns></returns>
         public async Task<TokenModel> CreateTokenWithClaim(IdentityUserModel identityUser, ClaimsIdentity identity)
         {
             // Create claims
@@ -67,6 +77,11 @@ namespace Helpdesk.Security.Token
         #endregion
 
         #region Private Methods 
+        /// <summary>
+        /// validate credential using identity model
+        /// </summary>
+        /// <param name="identityUser"></param>
+        /// <returns></returns>
         private bool ValidateCredentils(IdentityUserModel identityUser)
         {
             if (identityUser == null)
@@ -76,7 +91,12 @@ namespace Helpdesk.Security.Token
             }
             return ValidateCredentils(identityUser.UserName, identityUser.Password);
         }
-
+        /// <summary>
+        /// validate credential using username and password
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private bool ValidateCredentils(string userName, string password)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
@@ -86,6 +106,12 @@ namespace Helpdesk.Security.Token
             }
             return true;
         }
+        /// <summary>
+        /// create claim using identity
+        /// </summary>
+        /// <param name="identityUser"></param>
+        /// <param name="identity"></param>
+        /// <returns></returns>
         private async Task<List<Claim>> CreateClaim(IdentityUserModel identityUser, ClaimsIdentity identity)
         {
             List<Claim> claims = new List<Claim>()
@@ -101,7 +127,11 @@ namespace Helpdesk.Security.Token
 
             return claims;
         }
-
+        /// <summary>
+        /// create token using claim
+        /// </summary>
+        /// <param name="claims"></param>
+        /// <returns></returns>
         private JwtSecurityToken CreateToken(List<Claim> claims)
         {
             // Create the JWT security token and encode it.
@@ -114,7 +144,10 @@ namespace Helpdesk.Security.Token
                 signingCredentials: _jwtOptions.SigningCredentials);
             return jwt;
         }
-
+        /// <summary>
+        /// throw error based on validations
+        /// </summary>
+        /// <param name="options"></param>
         private void ThrowIfInvalidOptions(TokenProviderOptions options)
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
@@ -160,7 +193,12 @@ namespace Helpdesk.Security.Token
             this.ErrorMessage = "You are not authorized to use the application";
             return Task.FromResult<ClaimsIdentity>(null);
         }
-
+        /// <summary>
+        /// add list of roles as part of token for permission checking and authorization
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="portalContext"></param>
+        /// <returns></returns>
         private IEnumerable<Claim> AddRoles(ClaimsIdentity identity, string portalContext)
         {
             return identity.FindAll(ClaimTypes.Role);

@@ -60,6 +60,7 @@ export class AuthenticationService extends BaseService {
 
     public login = (user: LoginUser, isDummyUser = false): any => {
         this.tokenService.removeToken();
+        this.isLoggedIn = false;
         const data = { userName: user.userName, password: user.password };
         return this.commonDataService
             .post(data, 'api/jwt/token', null, true)
@@ -73,5 +74,6 @@ export class AuthenticationService extends BaseService {
         this.tokenService.setToken(token.access_token);
         this.user.userName = '';
         this.user.password = '';
+        this.isLoggedIn = true;
     }
 }

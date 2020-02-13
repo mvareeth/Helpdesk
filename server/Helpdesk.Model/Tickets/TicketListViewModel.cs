@@ -38,6 +38,6 @@ namespace Helpdesk.Model
         /// <summary>
         /// technicians working on this ticket
         /// </summary>
-        public TechnicianModel AssigedTechnician { get; set; }
+        public string AssignedTo { get; set; }
     }
 }

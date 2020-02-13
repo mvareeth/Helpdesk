@@ -22,7 +22,7 @@ export class TicketModel {
     /// <summary>
     /// list of technicians working on this ticket
     /// </summary>
-    assigedTechnicianId: number;
+    assigedTechnicianId?: number;
     /// <summary>
     /// client information of the ticket
     /// </summary>

@@ -20,6 +20,11 @@ namespace Helpdesk.Services
         {
             CIOC.Configure(services);
         }
+        /// <summary>
+        /// configure CORS
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="allowSpecificOrigin"></param>
         public static void ConfigureCors(this IServiceCollection services, string allowSpecificOrigin)
         {
             services.AddCors(options => {
@@ -32,6 +37,10 @@ namespace Helpdesk.Services
                     });
             });
         }
+        /// <summary>
+        /// configur authentication using token
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureAuthentication(this IServiceCollection services)
         {
             services.Configure<TokenProviderOptions>(options => {
@@ -68,13 +77,21 @@ namespace Helpdesk.Services
 
         private static IOCConfiguration CIOC => new IOCConfiguration();
         public static IConfiguration Config { get; set; }
-
+        /// <summary>
+        /// token issuer
+        /// </summary>
         private static string Issuer => TokenProviderSection[nameof(TokenProviderOptions.Issuer)];
-
+        /// <summary>
+        /// audience of the token
+        /// </summary>
         private static string Audience => TokenProviderSection[nameof(TokenProviderOptions.Audience)];
-
+        /// <summary>
+        /// path of the token
+        /// </summary>
         private static string Path => TokenProviderSection[nameof(TokenProviderOptions.Path)];
-
+        /// <summary>
+        /// how long the token is valid
+        /// </summary>
         private static TimeSpan ValidForMinutes
         {
             get
@@ -88,7 +105,9 @@ namespace Helpdesk.Services
         private static string SecretKey => "my$up3rs3cr3t_s3cr3tk3y!123";
 
         private static SymmetricSecurityKey SigningKey => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
-
+        /// <summary>
+        /// returns the list of serving urls from app settings
+        /// </summary>
         private static string[] ServingURLs
         {
             get

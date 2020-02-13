@@ -11,7 +11,7 @@ import { AuthGuard } from '../router-guard/auth.guard';
             {
                 path: '',
                 component: HelpdeskComponent,
-                //canActivate: [AuthGuard],
+                canActivate: [AuthGuard],
                 children: [
                     {
                         path: 'own',

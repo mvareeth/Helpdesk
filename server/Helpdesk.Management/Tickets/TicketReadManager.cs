@@ -1,6 +1,7 @@
 ﻿using Helpdesk.DataMapper;
 using Helpdesk.Diagnostics;
 using Helpdesk.Entities;
+using Helpdesk.Entities.Enum;
 using Helpdesk.Management.Clients;
 using Helpdesk.Management.User;
 using Helpdesk.Model;
@@ -45,8 +46,10 @@ namespace Helpdesk.Management.Tickets
         public IEnumerable<TicketListViewModel> GetOwnHelpdeskList(int userId)
         {
             var tickets = ticketReadRepository.GetOwnHelpdeskList(userId).ToList();
-            var models = ticketListMapper.EntityToModel(tickets);
-            return models;
+            var modelList = ticketListMapper.EntityToModel(tickets).ToList();
+            modelList.ForEach(os =>
+                MapCustomFields(os, tickets.First(op => op.Id == os.Id)));
+            return modelList;
         }
         /// <summary>
         /// get all All helpdesk ticket belongs to that team.
@@ -62,8 +65,10 @@ namespace Helpdesk.Management.Tickets
             if (teamMembers.Any(os => os.UserId == userId))
             {
                 var tickets = ticketReadRepository.GetAllHelpdeskList().ToList();
-                var models = ticketListMapper.EntityToModel(tickets);
-                return models;
+                var modelList = ticketListMapper.EntityToModel(tickets).ToList();
+                modelList.ForEach(os => 
+                    MapCustomFields(os, tickets.First(op => op.Id == os.Id)));
+                return modelList;
             }
 
             return null;
@@ -83,15 +88,33 @@ namespace Helpdesk.Management.Tickets
             }
 
             var ticketModel = ticketDetailMapper.EntityToModel(ticket);
-            if (ticket.AssigedTechnicianId.HasValue)
+            if (ticket.AssignedTechnicianId.HasValue)
             {
-                ticketModel.AssigedTechnician = userReadManager.GetUser(ticket.AssigedTechnicianId.Value);
+                ticketModel.AssigedTechnician = userReadManager.GetUser(ticket.AssignedTechnicianId.Value);
             }
             if (ticket.ClientId > 0)
             {
                 ticketModel.Client = clientReadManager.GetClientDetail(ticket.ClientId);
             }
             return ticketModel;
+        }
+
+        /// <summary>
+        /// method to map any custom fields. we could come up with custom mapper using mapster later.
+        /// </summary>
+        /// <param name="ticketEntity"></param>
+        /// <param name="ticketVm"></param>
+        private void MapCustomFields(TicketListViewModel ticketVm, TicketEntity ticketEntity)
+        {
+            ticketVm.Status = ((StatusEnum)ticketEntity.StatusId).ToString();
+            if (ticketEntity.AssignedTechnicianId.HasValue)
+            {
+                var userProfile = ticketEntity.AssignedTechnicianId.HasValue ?
+                        userReadManager.GetUser(ticketEntity.AssignedTechnicianId.Value) : null;
+                ticketVm.AssignedTo = userProfile != null ? 
+                    (userProfile.FirstName + ' ' + userProfile.LastName) : string.Empty;
+            }
+
         }
     }
 }

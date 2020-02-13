@@ -5,15 +5,15 @@ import { BaseService, CommonDataService } from '../shared/services';
 @Injectable({
   providedIn: 'root'
 })
-export class ClientService extends BaseService {
+export class TechniciamService extends BaseService {
     public constructor(private commonDataService: CommonDataService) {
-        super('api/client', 0, 0, 0);
+        super('api/user', 0, 0, 0);
     }
 
-    public getClient(clientId: number) {
-        return this.commonDataService.get(this.getURL() + '/' + clientId, false);
+    public getTechnician(userId: number) {
+        return this.commonDataService.get(this.getURL() + '/' + userId, false);
     }
-    public getClientList() {
+    public getTechnicianList() {
         return this.commonDataService.get(this.getURL('list'), false)
         .pipe(
             map(this.convertData)
