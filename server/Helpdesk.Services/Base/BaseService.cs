@@ -1,4 +1,4 @@
-﻿using Helpdesk.Extensions;
+using Helpdesk.Extensions;
 using Helpdesk.Filters;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,11 +13,25 @@ namespace Helpdesk.Services.Base
     public abstract class BaseService : ControllerBase
     {
         private int? _loggedInUserId;
+        private string? _loggedInUserName;
+        /// <summary>
+        /// logged-in user ud
+        /// </summary>
         public int LoginUserId {
             get
             {
                 return _loggedInUserId ?? FindLoggedInUserId();
             } 
+        }
+        /// <summary>
+        /// logged-in user name
+        /// </summary>
+        public string LoginUserName
+        {
+            get
+            {
+                return _loggedInUserName ?? FindLoggedInUserName();
+            }
         }
         /// <summary>
         /// get the logged in user id from httpconext
@@ -30,6 +44,18 @@ namespace Helpdesk.Services.Base
                 _loggedInUserId = HttpContext.User.GetLoggedInUserId();
             }
             return _loggedInUserId ?? 0;
+        }
+        /// <summary>
+        /// get the logged in user name from httpconext
+        /// </summary>
+        /// <returns></returns>
+        private string FindLoggedInUserName()
+        {
+            if (HttpContext != null)
+            {
+                _loggedInUserName = HttpContext.User.GetLoggedInUserName();
+            }
+            return _loggedInUserName ?? null;
         }
     }
 }
