@@ -13,7 +13,7 @@ namespace Helpdesk.Services.Base
     public abstract class BaseService : ControllerBase
     {
         private int? _loggedInUserId;
-        private string? _loggedInUserName;
+        private string _loggedInUserName;
         /// <summary>
         /// logged-in user ud
         /// </summary>
