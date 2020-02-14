@@ -11,3 +11,4 @@ Running it
 1.	npm install in web folder
 2.	npm start
 Server-side .NET Core application is an N layer application with in-memory storage. It uses Mapster instead of Automapper as an ORM.
+
