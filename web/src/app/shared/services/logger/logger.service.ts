@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { TokenService } from '../token/token.service';
 import { CommonHttpService } from '../http/common-http.service';
 import { SiteSettingService } from '../site-setting/site-setting.service';
@@ -13,7 +13,7 @@ export class LoggerService {
     public constructor(private $log: ConsoleLoggerService, private messageService: MessageService,
         private tokenService: TokenService, private commonHttpService: CommonHttpService,
         private siteSettings: SiteSettingService) {
-
+      
     }
 
     public log = (message: string, data?: any, source?: string, showToast?: boolean, saveToDB?: boolean) => {
@@ -76,7 +76,7 @@ export class LoggerService {
                 'browser': '',
                 'userName': ''
             };
-            this.logToDatabase(loggerVm);
+            this.logToDatabase(loggerVm); // if want we can log the error happended in client
         }
     }
 
@@ -91,7 +91,7 @@ export class LoggerService {
                     this.$log.error('saveToDB', error.message, null);
                 });
     }
-
+    // get the log settings to decide whether to log the errors in client app.
     private getLogSetting = () => {
         if (this.siteSettings.loggerSettings !== undefined) {
             return this.siteSettings.loggerSettings;
@@ -106,14 +106,5 @@ export class LoggerService {
                         this.$log.error('getLogSetting', error.message, null);
                     });
         }
-    }
-
-    /* a method to store the sass error message */
-    public get errorMessage(): string {
-        return this.sasErrorMessage;
-    }
-
-    public set errorMessage(sasErrorMessage: string) {
-        this.sasErrorMessage = sasErrorMessage;
     }
 }
