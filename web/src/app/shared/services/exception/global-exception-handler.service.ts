@@ -12,7 +12,7 @@ export class GlobalExceptionHandlerService extends ErrorHandler {
     public handleError(error: any): void {
         this.loggerService = this.injector.get(LoggerService) as LoggerService;
         // this.loggerService = <LoggerService>this.injector.get(LoggerService);
-        window.alert(error);
+        // window.alert(error);
         this.loggerService.error(error.message, null, null, true, true);
         super.handleError(error);
     }
