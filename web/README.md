@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.2.
 
+[![Build Status](https://dev.azure.com/manickathanmartin0101/HelpdeskGit/_apis/build/status/HelpdeskGit-CIient?branchName=master)](https://dev.azure.com/manickathanmartin0101/HelpdeskGit/_build/latest?definitionId=11&branchName=master)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4000/`. The app will automatically reload if you change any of the source files.
