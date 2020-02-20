@@ -21,7 +21,7 @@ Running it
 
 Server-side .NET Core application is an N layer application with in-memory storage. It uses Mapster instead of Automapper as an ORM.
 
-Web/Client application runs under http://localhost:4000 and servver runs under http://localhost:5000 in development mode.
+Web/Client application runs under http://localhost:4000 (site in azure : https://helpdesk200client.azurewebsites.net) and server runs under http://localhost:5000 (site in azure : https://helpdesk200-server.azurewebsites.net/) in development mode.
 To log-in to this application use following credentails
 username: Issac
 password: I100
