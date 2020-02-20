@@ -1,6 +1,7 @@
 using Helpdesk.Extensions;
 using Helpdesk.Filters;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Helpdesk.Services.Base
 {
+    [Authorize]
     [ApiController]
     [ResponseFilter()]
     public abstract class BaseService : ControllerBase
