@@ -2,7 +2,7 @@
 
 Angular 8 and .NET Core: Sample. This sample addresses following story points:
 
-[![Build Status](https://dev.azure.com/manickathanmartin0101/Helpdesk/_apis/build/status/mvareeth.Helpdesk?branchName=master)](https://dev.azure.com/manickathanmartin0101/Helpdesk/_build/latest?definitionId=1&branchName=master)
+[![Build Status](https://dev.azure.com/manickathanmartin0101/HelpdeskGit/_apis/build/status/HelpdeskGit-CIient?branchName=master)](https://dev.azure.com/manickathanmartin0101/HelpdeskGit/_build/latest?definitionId=11&branchName=master)
 
 1. A logged in Helpdesk user can create new support ticket and modify the existing support tickets 
 2. A logged in Helpdesk user can view all the support tickets assigned to the logged-in user. 
